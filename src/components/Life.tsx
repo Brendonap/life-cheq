@@ -37,7 +37,6 @@ const Life = (policy: any) => {
 
   const edit = () => {
     const { id } = policy.policy;
-    console.log(id);
     dispatch({
       type: "EDIT_POLICY",
       id: id,

@@ -7,6 +7,7 @@ import {
   ToastsContainerPosition
 } from "react-toasts";
 import uuid from "uuid/v4";
+import { format } from "date-fns";
 
 import InputWrapper from "./BaseInput";
 
@@ -15,7 +16,7 @@ const defaultState = {
   lumpSumContribution: 1000,
   debitOrderAmount: 1000,
   fundName: "Nedgroup Core Accelarated",
-  startMonth: ""
+  startMonth: format(new Date(), "yyyy-MM-dd")
 };
 
 const UnitTrust = (policy: any) => {
@@ -36,7 +37,6 @@ const UnitTrust = (policy: any) => {
 
   const edit = () => {
     const { id } = policy.policy;
-    console.log(id);
     dispatch({
       type: "EDIT_POLICY",
       id: id,
@@ -96,6 +96,17 @@ const UnitTrust = (policy: any) => {
                 name="fundName"
                 type="text"
                 value={input.fundName}
+                onChangeFunction={handleInput}
+              />
+            </div>
+          </div>
+          <div className=" mx-2 p-3">
+            <div className="flex flex-col text-gray-700 text-center bg-gray-300 p-2">
+              <InputWrapper
+                label="Start Month"
+                name="startMonth"
+                type="date"
+                value={input.startMonth}
                 onChangeFunction={handleInput}
               />
             </div>
