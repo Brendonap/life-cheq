@@ -1,17 +1,19 @@
-function addPolicy(policyList: any, policy: any) {
-  policyList.push(policy);
-  return policyList;
-}
-
 function policies(
-  state: Array<object> = [{}],
-  action: { type: string; payload: object }
+  state: object[] = [{}],
+  action: { type: string; payload: any; id?: string }
 ) {
-  console.log("there", state);
-  console.log(action.payload);
   switch (action.type) {
     case "ADD_POLICY":
-      return addPolicy(state, action.payload);
+      return [...state, action.payload];
+    case "DELETE_POLICY":
+      return state.filter((policy: any) => policy.id !== action.payload.id);
+    case "EDIT_POLICY":
+      return state.map(
+        (currentPolicy: any) =>
+          [action.payload].find(
+            updatedPolicy => updatedPolicy.id === currentPolicy.id
+          ) || currentPolicy
+      );
     default:
       return state;
   }
